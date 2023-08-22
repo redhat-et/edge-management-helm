@@ -1,0 +1,12 @@
+images:
+  postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+  unleash: quay.io/cloudservices/unleash-docker:4.22.3
+
+db:
+  hostname: featureflags-db.demo.svc
+  port: "5432"
+  adminUsername: postgres
+  adminPassword: M0QCfMXo9tvfnufS
+  name: unleash
+  username: HQTFYnvDCUOGxL9S
+  password: uVnDhmdLFnWanok7

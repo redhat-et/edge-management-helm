@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: edge-api-service
+  labels:
+    app: edge-api
+    pod: edge-api-service
+spec:
+  ports:
+  - appProtocol: http
+    name: public
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - appProtocol: http
+    name: metrics
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    pod: edge-api-service
+  type: ClusterIP

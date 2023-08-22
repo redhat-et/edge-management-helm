@@ -1,0 +1,224 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-api-service
+  labels:
+    app: edge-api
+    pod: edge-api-service
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: edge-api
+      pod: edge-api-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: edge-api
+        pod: edge-api-service
+    spec:
+      containers:
+      - env:
+        - name: CLOWDER_ENABLED
+          value: "false"
+        - name: ENABLE_CLOUDWATCH_LOGGING
+          value: "false"
+        - name: AUTH
+          value: "false"
+        - name: EDGETARBALLSBUCKET
+          value: {{ .Values.objectStore.bucket }}
+        - name: OPENAPIFILEPATH
+          value: /var/tmp/openapi.json
+        - name: IMAGEBUILDERURL
+          value: http://image-builder-service:8000
+        - name: INVENTORYURL
+          value: http://host-inventory-service:8080/
+        - name: PLAYBOOKDISPATCHERURL
+          value: http://host-playbook-dispatcher:8080/
+        - name: CONTENT_SOURCES_URL
+          value: http://content-sources:8000
+        - name: FDO_HOST_URL
+          value: https://fdo.redhat.com
+        - name: FDO_API_VERSION
+          value: v1
+        - name: PLAYBOOKDISPATCHERPSK
+          valueFrom:
+            secretKeyRef:
+              key: key
+              name: psk-playbook-dispatcher
+        - name: IMAGEBUILDERORGID
+          valueFrom:
+            secretKeyRef:
+              key: key
+              name: image-builder-org-id
+        - name: GLITCHTIPDSN
+          valueFrom:
+            secretKeyRef:
+              key: dsn
+              name: glitchtip-dsn
+        - name: EDGEAPIBASEURL
+          value: https://cloud.stage.redhat.com
+        - name: EDGECERTAPIBASEURL
+          value: https://cert.console.stage.redhat.com
+        - name: UPLOADWORKERS
+          value: "50"
+        - name: LOG_LEVEL
+          value: DEBUG
+        - name: UNLEASH_URL
+        - name: UNLEASH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CLIENT_ACCESS_TOKEN
+              name: unleash-ephemeral
+        - name: TENANT_TRANSLATOR_HOST
+          value: gateway.3scale-dev.svc.cluster.local
+        - name: TENANT_TRANSLATOR_PORT
+          value: "8891"
+        - name: ACG_CONFIG
+          value: /cdapp/cdappconfig.json
+        image: {{ .Values.images.edgeApi }}
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: metrics
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: edge-api-service
+        ports:
+        - containerPort: 8000
+          name: web
+          protocol: TCP
+        - containerPort: 9000
+          name: metrics
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: metrics
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          requests:
+            cpu: 30m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /cdapp/
+          name: config-secret
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - bash
+        - -c
+        - edge-api-migrate
+        env:
+        - name: CLOWDER_ENABLED
+          value: "false"
+        - name: ENABLE_CLOUDWATCH_LOGGING
+          value: "false"
+        - name: AUTH
+          value: "false"
+        - name: EDGETARBALLSBUCKET
+          value: {{ .Values.objectStore.bucket }}
+        - name: OPENAPIFILEPATH
+          value: /var/tmp/openapi.json
+        - name: IMAGEBUILDERURL
+          value: http://image-builder-service:8000
+        - name: INVENTORYURL
+          value: http://host-inventory-service:8080/
+        - name: PLAYBOOKDISPATCHERURL
+          value: http://host-playbook-dispatcher:8080/
+        - name: CONTENT_SOURCES_URL
+          value: http://content-sources:8000
+        - name: FDO_HOST_URL
+          value: https://fdo.redhat.com
+        - name: FDO_API_VERSION
+          value: v1
+        - name: PLAYBOOKDISPATCHERPSK
+          valueFrom:
+            secretKeyRef:
+              key: key
+              name: psk-playbook-dispatcher
+        - name: IMAGEBUILDERORGID
+          valueFrom:
+            secretKeyRef:
+              key: key
+              name: image-builder-org-id
+        - name: GLITCHTIPDSN
+          valueFrom:
+            secretKeyRef:
+              key: dsn
+              name: glitchtip-dsn
+        - name: EDGEAPIBASEURL
+          value: https://cloud.stage.redhat.com
+        - name: EDGECERTAPIBASEURL
+          value: https://cert.console.stage.redhat.com
+        - name: UPLOADWORKERS
+          value: "50"
+        - name: LOG_LEVEL
+          value: DEBUG
+        - name: UNLEASH_URL
+        - name: UNLEASH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: CLIENT_ACCESS_TOKEN
+              name: unleash-ephemeral
+        - name: TENANT_TRANSLATOR_HOST
+          value: gateway.3scale-dev.svc.cluster.local
+        - name: TENANT_TRANSLATOR_PORT
+          value: "8891"
+        - name: ACG_CONFIG
+          value: /cdapp/cdappconfig.json
+        image: {{ .Values.images.edgeApi }}
+        imagePullPolicy: IfNotPresent
+        name: run-migrations-init
+        resources:
+          requests:
+            cpu: 30m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /cdapp/
+          name: config-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccount: edge-api-service
+      serviceAccountName: edge-api-service
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config-secret
+        secret:
+          defaultMode: 420
+          secretName: edge-api

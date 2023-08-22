@@ -1,0 +1,21 @@
+images:
+  edgeApi: quay.io/fzdarsky/edge-api:latest
+  postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+
+db:
+  hostname: edge-api-db.demo.svc
+  port: "5432"
+  adminUsername: postgres
+  adminPassword: QtHNtp1ivazLxvuZ
+  name: edge
+  username: kfjzLxc0RVUKlV2K
+  password: sZBQBMa6R7HQGKIa
+
+objectStore:
+  hostname: env-demo-minio.demo.svc
+  accessKey: 9GlWHMZ0f6HQ
+  secretKey: tfwbBLhHbnh7
+  bucket: rh-edge-tarballs
+
+ingress:
+  hostname: env-demo.apps.management-hub.redhat-et.edge-lab.net

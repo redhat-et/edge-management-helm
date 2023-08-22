@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: edge-api
+  name: edge-api-service
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: edge-api-service
+            port:
+              name: auth
+        path: /api/edge/
+        pathType: Prefix
+  tls:
+  - {}

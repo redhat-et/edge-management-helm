@@ -18,4 +18,4 @@ objectStore:
   bucket: rh-edge-tarballs
 
 ingress:
-  hostname: env-demo.apps.management-hub.redhat-et.edge-lab.net
+  hostname: edge.apps.management-hub.redhat-et.edge-lab.net

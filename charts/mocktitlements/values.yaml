@@ -1,0 +1,8 @@
+images:
+  mocktitlements: quay.io/cloudservices/mocktitlements:e24820c
+
+ingress:
+  hostname: entitlements.apps.management-hub.redhat-et.edge-lab.net
+
+keycloak:
+  url: http://sso.demo.svc:8080

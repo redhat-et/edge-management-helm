@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: mocktitlements
+  name: mocktitlements
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.hostname}}
+    http:
+      paths:
+      - backend:
+          service:
+            name: mocktitlements
+            port:
+              name: auth
+        path: /api/entitlements/
+        pathType: Prefix
+  tls:
+  - {}

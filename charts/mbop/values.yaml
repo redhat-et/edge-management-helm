@@ -1,0 +1,5 @@
+images:
+  mbop: quay.io/cloudservices/mbop:bb071db
+
+keycloak:
+  url: http://sso.demo.svc:8080

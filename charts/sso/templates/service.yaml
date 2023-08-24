@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sso
+  labels:
+    app: sso
+    env-app: env-demo-sso
+spec:
+  ports:
+  - name: keycloak
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: sso
+    env-app: env-demo-sso
+  type: ClusterIP

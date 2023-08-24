@@ -1,0 +1,13 @@
+images:
+  keycloak: quay.io/keycloak/keycloak:15.0.2
+
+db:
+  bopurl: http://mbop.demo.svc:8090
+  defaultUsername: jdoe
+  defaultPassword: Zb0JWus4FdseuCIU
+  username: 6Ja7ya18
+  password: 2cNVZZe7hvo5ffNR
+  version: "15.0.2"
+
+ingress:
+  hostname: sso.apps.management-hub.redhat-et.edge-lab.net

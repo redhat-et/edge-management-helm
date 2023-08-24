@@ -12,7 +12,7 @@ db:
   password: sZBQBMa6R7HQGKIa
 
 objectStore:
-  hostname: env-demo-minio.demo.svc
+  hostname: minio.demo.svc
   accessKey: 9GlWHMZ0f6HQ
   secretKey: tfwbBLhHbnh7
   bucket: rh-edge-tarballs

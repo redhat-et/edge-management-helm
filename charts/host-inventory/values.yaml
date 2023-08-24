@@ -1,0 +1,34 @@
+images:
+  postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+  insightsInventory: quay.io/fzdarsky/insights-inventory:9a42b66
+
+db:
+  hostname: host-inventory-db.demo.svc
+  port: "5432"
+  adminUsername: postgres
+  adminPassword: TYvFrZD5wNUq4UPp
+  name: host-inventory
+  username: 3Jn4ntQYSWqEbz2K
+  password: VGf2h8PgTzvmejEa
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net
+
+inventoryService:
+  hostname: host-inventory-service.demo.svc
+
+rbac:
+  hostname: rbac-service.demo.svc
+
+ingressService:
+  hostname: ingress-service.demo.svc
+
+featureFlags:
+  hostname: featureflags.demo.svc
+  clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d
+
+kafka:
+  hostname: kafka-kafka-bootstrap.demo.svc
+
+xjoin:
+  hostname: xjoin-search-api.demo.svc

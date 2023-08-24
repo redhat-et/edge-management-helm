@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: host-inventory
+    pod: host-inventory-service
+  name: host-inventory-service
+spec:
+  ports:
+  - appProtocol: http
+    name: public
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - appProtocol: http
+    name: auth
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - appProtocol: http
+    name: metrics
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    pod: host-inventory-service
+  type: ClusterIP

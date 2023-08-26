@@ -42,7 +42,7 @@ spec:
           value: {{ .Values.db.adminPassword }}
         - name: POSTGRESQL_DATABASE
           value: {{ .Values.db.name }}
-        image: 
+        image: {{ .Values.images.posgresql }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:

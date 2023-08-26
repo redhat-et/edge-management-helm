@@ -154,8 +154,8 @@ spec:
         - name: RBAC_DESTRUCTIVE_ENABLED_UNTIL
         - name: CLOWDER_ENABLED
           value: "true"
-        - name: APP_NAMESPACE
-          value: rbac
+        # - name: APP_NAMESPACE
+        #   value: rbac
         - name: CW_NULL_WORKAROUND
           value: "true"
         - name: REDIS_MAX_CONNECTIONS
@@ -357,8 +357,8 @@ spec:
         - name: RBAC_DESTRUCTIVE_ENABLED_UNTIL
         - name: CLOWDER_ENABLED
           value: "true"
-        - name: APP_NAMESPACE
-          value: rbac
+        # - name: APP_NAMESPACE
+        #   value: rbac
         - name: CW_NULL_WORKAROUND
           value: "true"
         - name: REDIS_MAX_CONNECTIONS

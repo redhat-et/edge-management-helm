@@ -31,17 +31,17 @@ spec:
       containers:
       - env:
         - name: POSTGRESQL_USER
-          value: {{ .Value.db.username }}
+          value: {{ .Values.db.username }}
         - name: POSTGRESQL_PASSWORD
-          value: {{ .Value.db.password }}
+          value: {{ .Values.db.password }}
         - name: PGPASSWORD
-          value: {{ .Value.db.adminPassword }}
+          value: {{ .Values.db.adminPassword }}
         - name: POSTGRESQL_MASTER_USER
-          value: {{ .Value.db.adminUsername }}
+          value: {{ .Values.db.adminUsername }}
         - name: POSTGRESQL_MASTER_PASSWORD
-          value: {{ .Value.db.adminPassword }}
+          value: {{ .Values.db.adminPassword }}
         - name: POSTGRESQL_DATABASE
-          value: {{ .Value.db.name }}
+          value: {{ .Values.db.name }}
         image: 
         imagePullPolicy: IfNotPresent
         livenessProbe:

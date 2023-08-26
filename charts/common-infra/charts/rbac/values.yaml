@@ -1,6 +1,7 @@
 images:
   rbac: quay.io/cloudservices/rbac:14470ec
   posgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+  redis: quay.io/cloudservices/redis-ephemeral:6
 
 db:
   hostname: rbac-db.demo.svc

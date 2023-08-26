@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rbac
+    service: db
+    sub: local_db
+  name: rbac-db
+spec:
+  ports:
+  - name: database
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: rbac
+    service: db
+    sub: local_db
+  sessionAffinity: None
+  type: ClusterIP

@@ -10,3 +10,7 @@ db:
   name: unleash
   username: HQTFYnvDCUOGxL9S
   password: uVnDhmdLFnWanok7
+
+unleash:
+  adminAccessToken: "*:*.3626cb70171286fec8b2a876fe156781"
+  clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d

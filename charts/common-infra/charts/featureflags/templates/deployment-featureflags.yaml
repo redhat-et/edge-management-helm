@@ -38,12 +38,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: clientAccessToken
-              name: env-demo-featureflags
+              name: featureflags
         - name: INIT_ADMIN_API_TOKENS
           valueFrom:
             secretKeyRef:
               key: adminAccessToken
-              name: env-demo-featureflags
+              name: featureflags
         image: {{ .Values.images.unleash }}
         imagePullPolicy: IfNotPresent
         livenessProbe:

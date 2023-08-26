@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: rbac
+  name: rbac-service
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: rbac-service
+            port:
+              name: auth
+        path: /api/rbac/
+        pathType: Prefix
+  tls:
+  - {}

@@ -1,0 +1,38 @@
+images:
+  rbac: quay.io/cloudservices/rbac:14470ec
+  posgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+
+db:
+  hostname: rbac-db.demo.svc
+  port: "5432"
+  adminUsername: postgres
+  adminPassword: FZ9H9VkGCWpPeqBr
+  name: rbac
+  username: YiO0w9paf5ZkEDk0
+  password: H3bnpAsg7hnzlnOS
+
+secrets:
+  djangoSecretKey: 11111111111111111111111111111111111111111111111111   MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTE=
+  principalProxyApiToken: 2222222222222222222222222222222222222222222222222222222222222222 MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMg==
+  principalProxyClientId: insights-rbac
+  principalProxyEnv: stage c3RhZ2U=
+  principalProxyHost: mbop bWJvcA==
+  principalProxyPort: 8090 ODA5MA==
+  principalProxyProtocol: http aHR0cA==
+  principalProxySourceCert: False
+  principalProxySslVerify: False
+  sentryDsn: ""
+  insightsRbacToken: "2222222222222222222222222222222222222222222222222222222222222222"
+
+rbacService:
+  hostname: rbac-service.demo.svc
+
+redis:
+  hostname: rbac-redis.demo.svc
+
+kafka:
+  hostname: kafka-kafka-bootstrap.demo.svc
+
+featureFlags:
+  hostname: featureflags.demo.svc
+  clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d

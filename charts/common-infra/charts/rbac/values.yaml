@@ -24,6 +24,9 @@ secrets:
   sentryDsn: ""
   insightsRbacToken: "2222222222222222222222222222222222222222222222222222222222222222"
 
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net
+
 rbacService:
   hostname: rbac-service.demo.svc
 

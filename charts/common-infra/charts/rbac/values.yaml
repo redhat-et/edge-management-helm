@@ -12,15 +12,15 @@ db:
   password: H3bnpAsg7hnzlnOS
 
 secrets:
-  djangoSecretKey: 11111111111111111111111111111111111111111111111111   MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTE=
-  principalProxyApiToken: 2222222222222222222222222222222222222222222222222222222222222222 MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMg==
+  djangoSecretKey: "11111111111111111111111111111111111111111111111111"
+  principalProxyApiToken: "2222222222222222222222222222222222222222222222222222222222222222"
   principalProxyClientId: insights-rbac
-  principalProxyEnv: stage c3RhZ2U=
-  principalProxyHost: mbop bWJvcA==
-  principalProxyPort: 8090 ODA5MA==
-  principalProxyProtocol: http aHR0cA==
-  principalProxySourceCert: False
-  principalProxySslVerify: False
+  principalProxyEnv: stage
+  principalProxyHost: mbop
+  principalProxyPort: "8090"
+  principalProxyProtocol: http
+  principalProxySourceCert: "False"
+  principalProxySslVerify: "False"
   sentryDsn: ""
   insightsRbacToken: "2222222222222222222222222222222222222222222222222222222222222222"
 

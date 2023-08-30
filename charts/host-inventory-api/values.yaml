@@ -1,6 +1,7 @@
 images:
   postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
   insightsInventory: quay.io/fzdarsky/insights-inventory:9a42b66
+  caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e
 
 db:
   hostname: host-inventory-db.demo.svc
@@ -32,3 +33,6 @@ kafka:
 
 xjoin:
   hostname: xjoin-search-api.demo.svc
+
+bopUrl: http://mbop.demo.svc:8090
+ssoUrl: http://sso.demo.svc:8080

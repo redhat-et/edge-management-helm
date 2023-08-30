@@ -1,6 +1,7 @@
 images:
   chromeService: quay.io/cloudservices/chrome-service:d309ee6
   postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+  caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e
 
 db:
   hostname: chrome-service-db.demo.svc
@@ -24,3 +25,5 @@ featureFlags:
 kafka:
   hostname: kafka-kafka-bootstrap.demo.svc
 
+bopUrl: http://mbop.demo.svc:8090
+ssoUrl: http://sso.demo.svc:8080

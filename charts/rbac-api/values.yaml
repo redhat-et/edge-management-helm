@@ -43,4 +43,4 @@ featureFlags:
   clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d
 
 bopUrl: http://mbop.demo.svc:8090
-ssoUrl: http://env-ephemeral-encnmy-keycloak.ephemeral-encnmy.svc:8080
+ssoUrl: http://sso.demo.svc:8080

@@ -162,6 +162,74 @@ spec:
           name: gunicorn-worker-dir
         - mountPath: /cdapp/
           name: config-secret
+      - name: crcauth
+        image: {{ .Values.images.caddyPlugin }}
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: auth
+            containerPort: 8080
+            protocol: TCP
+        env:
+          - name: CADDY_PORT
+            value: '8000'
+          - name: CADDY_BOP_URL
+            valueFrom:
+              secretKeyRef:
+                name: caddy-config-rbac-service
+                key: bopurl
+                optional: false
+          - name: CADDY_KEYCLOAK_URL
+            valueFrom:
+              secretKeyRef:
+                name: caddy-config-rbac-service
+                key: keycloakurl
+                optional: false
+          - name: CADDY_WHITELIST
+            valueFrom:
+              secretKeyRef:
+                name: caddy-config-rbac-service
+                key: whitelist
+                optional: false
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        terminationMessagePath: /dev/termination-log
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 2
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        securityContext:
+          capabilities:
+            drop:
+              - ALL
+          runAsUser: 1002090000
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+        terminationMessagePolicy: File
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

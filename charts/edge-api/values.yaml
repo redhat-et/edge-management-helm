@@ -1,6 +1,7 @@
 images:
   edgeApi: quay.io/fzdarsky/edge-api:latest
   postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+  caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e
 
 db:
   hostname: edge-api-db.demo.svc
@@ -19,3 +20,6 @@ objectStore:
 
 ingress:
   hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net
+
+bopUrl: http://mbop.demo.svc:8090
+ssoUrl: http://sso.demo.svc:8080

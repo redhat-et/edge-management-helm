@@ -22,7 +22,7 @@ spec:
         app: edge-frontend
     spec:
       containers:
-      - image: {{ .Values.image.edgeFrontend }}
+      - image: {{ .Values.images.edgeFrontend }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

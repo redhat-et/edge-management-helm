@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    frontendenv: env-demo
+  name: env-demo
+data:
+  ansible-navigation.json: '{"id":"ansible","title":"Ansible Automation Platform","navItems":[]}'
+  application-services-navigation.json: '{"id":"application-services","title":"Application
+    and Data Services","navItems":[]}'
+  docs.json: '{"id":"docs","title":"Documentation","navItems":[]}'
+  edge-navigation.json: '{"id":"edge","title":"Edge Management","navItems":[{"title":"Inventory","permissions":[{"method":"withEmail","args":["@redhat.com"]}],"routes":[{"title":"Groups","appId":"edge","href":"/edge/fleet-management"},{"title":"Systems","appId":"edge","href":"/edge/inventory"}],"expandable":true},{"title":"Manage
+    Images","permissions":[{"method":"withEmail","args":["@redhat.com","@sbb.ch"]}],"routes":[{"title":"Images","appId":"edge","href":"/edge/manage-images"},{"title":"Custom
+    Repositories","appId":"edge","href":"/edge/repositories"}],"expandable":true},{"title":"Learning
+    Resources","href":"/edge/learning-resources","permissions":[{"method":"withEmail","args":["@redhat.com","@sbb.ch"]}]}]}'
+  fed-modules.json: '{"chrome":{"manifestLocation":"/apps/chrome/js/fed-mods.json","config":{"ssoUrl":"https://env-ephemeral-encnmy-x9cq6y5e-auth.apps.c-rh-c-eph.8p0c.p1.openshiftapps.com/auth/"},"fullProfile":false},"dashboard":{"manifestLocation":"/apps/dashboard/fed-mods.json","modules":[{"id":"dashboard","module":"./RootApp","routes":[{"pathname":"/insights/dashboard"}]}],"fullProfile":false},"edge":{"manifestLocation":"/apps/edge/fed-mods.json","modules":[{"id":"edge","module":"./RootApp","routes":[{"pathname":"/edge"}]}],"moduleID":"edge","fullProfile":false},"inventory":{"manifestLocation":"/apps/inventory/fed-mods.json","modules":[{"id":"inventory","module":"./RootApp","routes":[{"pathname":"/insights/inventory"}]}],"fullProfile":false},"landing":{"manifestLocation":"/apps/landing/fed-mods.json","modules":[{"id":"landing","module":"./RootApp","routes":[{"pathname":"/","exact":true}]}],"fullProfile":false},"rbac":{"manifestLocation":"/apps/rbac/fed-mods.json","modules":[{"id":"my-user-access","module":"./MyUserAccess","routes":[{"pathname":"/iam"},{"pathname":"/iam/my-user-access"}]},{"id":"iam-user-access","module":"./IamUserAccess","routes":[{"pathname":"/iam/user-acces"}]}],"fullProfile":false}}'
+  hac-navigation.json: '{"id":"hac","title":"HAC","navItems":[]}'
+  insights-navigation.json: '{"id":"rhel","title":"Red Hat Insights","navItems":[{"title":"Inventory","appId":"inventory","href":"/insights/inventory","product":"Red
+    Hat Insights"}]}'
+  landing-navigation.json: '[{"title":"OpenShift","appId":"openshift","href":"/openshift"},{"title":"Red
+    Hat Enterprise Linux","routes":[{"title":"Red Hat Insights","appId":"dashboard","href":"/insights/dashboard"},{"title":"Edge
+    Management","appId":"edge","href":"/edge"}],"expandable":true},{"title":"Ansible
+    Automation Platform","appId":"ansible","href":"/ansible/ansible-dashboard"}]'
+  openshift-navigation.json: '{"id":"openshift","title":"OpenShift","navItems":[]}'
+  settings-navigation.json: '{"id":"settings","title":"Settings","navItems":[{"title":"My
+    User Access","appId":"rbac","href":"/iam/my-user-access"},{"title":"User Access","permissions":[{"method":"isEntitled"}],"routes":[{"title":"Users","appId":"rbac","href":"/iam/user-access/users"},{"title":"Roles","appId":"rbac","href":"/iam/user-access/roles"},{"title":"Groups","appId":"rbac","href":"/iam/user-access/groups"},{"title":"Red
+    Hat Access Requests","appId":"accessRequests","href":"//iam/user-access/access-requests"}],"expandable":true}]}'
+  user-preferences-navigation.json: '{"id":"user-preferences","title":"User Preferences","navItems":[]}'

@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    frontend: chrome
+  name: chrome
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: chrome
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix
+      - backend:
+          service:
+            name: chrome
+            port:
+              number: 8000
+        path: /config/chrome
+        pathType: Prefix
+      - backend:
+          service:
+            name: chrome
+            port:
+              number: 8000
+        path: /apps/chrome
+        pathType: Prefix
+      - backend:
+          service:
+            name: chrome
+            port:
+              number: 8000
+        path: /beta/apps/chrome
+        pathType: Prefix
+      - backend:
+          service:
+            name: chrome
+            port:
+              number: 8000
+        path: /preview/apps/chrome
+        pathType: Prefix
+  tls:
+  - {}

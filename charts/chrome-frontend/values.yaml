@@ -1,0 +1,5 @@
+images:
+  chromeFrontend: quay.io/cloudservices/insights-chrome-frontend:3179c27
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net

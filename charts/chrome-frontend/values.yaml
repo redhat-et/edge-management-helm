@@ -3,3 +3,6 @@ images:
 
 ingress:
   hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net
+
+sso:
+  hostname: sso.apps.management-hub.redhat-et.edge-lab.net

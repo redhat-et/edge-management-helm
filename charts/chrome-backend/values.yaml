@@ -1,5 +1,5 @@
 images:
-  chromeService: quay.io/cloudservices/chrome-service:d309ee6
+  chromeService: quay.io/cloudservices/chrome-service:60e631d
   postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
   caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e
 

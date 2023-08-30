@@ -1,5 +1,5 @@
 images:
-  landingFrontend: quay.io/cloudservices/landing-page-frontend:5b249f3
+  landingFrontend: quay.io/cloudservices/landing-page-frontend:732d306
 
 ingress:
   hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net

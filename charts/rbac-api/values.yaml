@@ -1,5 +1,5 @@
 images:
-  rbac: quay.io/cloudservices/rbac:14470ec
+  rbac: quay.io/cloudservices/rbac:32e6c8a
   posgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
   redis: quay.io/cloudservices/redis-ephemeral:6
   caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e

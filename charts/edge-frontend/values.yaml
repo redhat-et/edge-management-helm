@@ -1,0 +1,5 @@
+images:
+  edgeFrontend: quay.io/fzdarsky/edge-frontend:latest
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net

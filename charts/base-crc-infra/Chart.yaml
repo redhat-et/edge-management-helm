@@ -1,6 +1,6 @@
 apiVersion: v2
-name: common-infra
-description: Common cloud.redhat.com infrastructure services
+name: base-crc-infra
+description: Base cloud.redhat.com infrastructure services
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,14 +22,3 @@ version: 0.0.1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.1"
-
-dependencies:
-- name: mbop
-  version: 0.0.1
-  repository: file://charts/mbop
-- name: mocktitlements
-  version: 0.0.1
-  repository: file://charts/mocktitlements
-# - name: rbac
-#   version: 0.0.1
-#   repository: file://charts/rbac

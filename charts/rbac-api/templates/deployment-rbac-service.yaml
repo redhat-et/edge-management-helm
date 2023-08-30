@@ -285,10 +285,6 @@ spec:
           runAsUser: 1002090000
           runAsNonRoot: true
           allowPrivilegeEscalation: false
-        volumeMounts:
-          - name: kube-api-access-2qld7
-            readOnly: true
-            mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         terminationMessagePolicy: File
         resources:
           limits:

@@ -1,0 +1,5 @@
+images:
+  insightsFrontend: quay.io/cloudservices/insights-inventory-frontend:c5b7e67
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net

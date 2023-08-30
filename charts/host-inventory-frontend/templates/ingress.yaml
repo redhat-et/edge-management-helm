@@ -1,0 +1,35 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: inventory
+  labels:
+    frontend: inventory
+spec:
+  ingressClassName: openshift-default
+  tls:
+    - {}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /apps/inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory
+                port:
+                  number: 8000
+          - path: /beta/apps/inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory
+                port:
+                  number: 8000
+          - path: /preview/apps/inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory
+                port:
+                  number: 8000

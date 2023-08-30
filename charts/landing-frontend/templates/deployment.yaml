@@ -18,11 +18,11 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-\     labels:
+     labels:
         frontend: landing
     spec:
       containers:
-      - image: {{ .Values.images.landingFrontend}}
+      - image: {{ .Values.images.landingFrontend }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

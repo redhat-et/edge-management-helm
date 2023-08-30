@@ -2,6 +2,7 @@ images:
   rbac: quay.io/cloudservices/rbac:14470ec
   posgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
   redis: quay.io/cloudservices/redis-ephemeral:6
+  caddyPlugin: quay.io/cloudservices/crc-caddy-plugin:1c4882e
 
 db:
   hostname: rbac-db.demo.svc
@@ -40,3 +41,6 @@ kafka:
 featureFlags:
   hostname: featureflags.demo.svc
   clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d
+
+bopUrl: http://mbop.demo.svc:8090
+ssoUrl: http://env-ephemeral-encnmy-keycloak.ephemeral-encnmy.svc:8080

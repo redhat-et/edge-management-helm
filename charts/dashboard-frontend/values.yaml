@@ -1,0 +1,5 @@
+images:
+  dashboardFrontend: quay.io/cloudservices/insights-dashboard-frontend:b595224
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net

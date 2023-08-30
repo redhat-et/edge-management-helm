@@ -1,0 +1,272 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chrome-service
+    pod: chrome-service-api
+  name: chrome-service-api
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: chrome-service
+      pod: chrome-service-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: chrome-service
+        pod: chrome-service-api
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: chrome-service
+                  pod: chrome-service-api
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: chrome-service
+                  pod: chrome-service-api
+              topologyKey: kubernetes.io/hostname
+            weight: 99
+      containers:
+      - env:
+        - name: CLOWDER_ENABLED
+          value: ${CLOWDER_ENABLED}
+        - name: LOG_LEVEL
+          value: Info
+        - name: INTERCOM_DEFAULT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_DEFAULT
+              name: chrome-service-backend
+        - name: INTERCOM_HAC_CORE
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_HAC_CORE
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT_DEV
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT_DEV
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_PROD
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_PROD
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_STAGE
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_STAGE
+              name: chrome-service-backend
+        - name: ACG_CONFIG
+          value: /cdapp/cdappconfig.json
+        image: {{ .Values.images.chromeService }}
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 120
+        name: chrome-service-api
+        ports:
+        - containerPort: 8000
+          name: web
+          protocol: TCP
+        - containerPort: 9000
+          name: metrics
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 120
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 30m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /cdapp/
+          name: config-secret
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - bash
+        - -c
+        - chrome-migrate
+        env:
+        - name: CLOWDER_ENABLED
+          value: ${CLOWDER_ENABLED}
+        - name: LOG_LEVEL
+          value: Info
+        - name: INTERCOM_DEFAULT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_DEFAULT
+              name: chrome-service-backend
+        - name: INTERCOM_HAC_CORE
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_HAC_CORE
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT_DEV
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT_DEV
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_PROD
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_PROD
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_STAGE
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_STAGE
+              name: chrome-service-backend
+        - name: ACG_CONFIG
+          value: /cdapp/cdappconfig.json
+        image: quay.io/cloudservices/chrome-service:d309ee6
+        imagePullPolicy: IfNotPresent
+        name: run-db-migration-init
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 30m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /cdapp/
+          name: config-secret
+      - command:
+        - bash
+        - -c
+        - chrome-search-index
+        env:
+        - name: CLOWDER_ENABLED
+          value: ${CLOWDER_ENABLED}
+        - name: LOG_LEVEL
+          value: Info
+        - name: INTERCOM_DEFAULT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_DEFAULT
+              name: chrome-service-backend
+        - name: INTERCOM_HAC_CORE
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_HAC_CORE
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT
+              name: chrome-service-backend
+        - name: INTERCOM_OPENSHIFT_DEV
+          valueFrom:
+            secretKeyRef:
+              key: INTERCOM_OPENSHIFT_DEV
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_PROD
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_PROD
+              name: chrome-service-backend
+        - name: SEARCH_CLIENT_SECRET_STAGE
+          valueFrom:
+            secretKeyRef:
+              key: SEARCH_CLIENT_SECRET_STAGE
+              name: chrome-service-backend
+        - name: ACG_CONFIG
+          value: /cdapp/cdappconfig.json
+        image: quay.io/cloudservices/chrome-service:d309ee6
+        imagePullPolicy: IfNotPresent
+        name: publish-search-index-init
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 30m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /cdapp/
+          name: config-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: chrome-service-api
+      serviceAccountName: chrome-service-api
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: config-secret
+        secret:
+          defaultMode: 420
+          secretName: chrome-service

@@ -1,0 +1,26 @@
+images:
+  chromeService: quay.io/cloudservices/chrome-service:d309ee6
+  postgresql: quay.io/cloudservices/postgresql-rds:12-9ee2984
+
+db:
+  hostname: chrome-service-db.demo.svc
+  port: "5432"
+  adminUsername: postgres
+  adminPassword: aEPsnVigMZ90SoSx
+  name: chrome-service
+  username: QRT7R9LniQioiuZY
+  password: AacLdzWv1aEIoEvp
+
+ingress:
+  hostname: edge-api.apps.management-hub.redhat-et.edge-lab.net
+
+chromeService:
+  hostname: chrome-service-api.demo.svc
+
+featureFlags:
+  hostname: featureflags.demo.svc
+  clientAccessToken: default:development.224fde79cd528ca59cc190e0d2bb677d
+
+kafka:
+  hostname: kafka-kafka-bootstrap.demo.svc
+

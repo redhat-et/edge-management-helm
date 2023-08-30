@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: chrome-service
+  name: chrome-service-api
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: chrome-service-api
+            port:
+              name: auth
+        path: /api/chrome-service/
+        pathType: Prefix
+  tls:
+  - {}

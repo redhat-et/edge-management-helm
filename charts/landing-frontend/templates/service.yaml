@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    frontend: landing
+  name: landing
+spec:
+  ports:
+  - appProtocol: http
+    name: public
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - appProtocol: http
+    name: metrics
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    frontend: landing
+  sessionAffinity: None
+  type: ClusterIP

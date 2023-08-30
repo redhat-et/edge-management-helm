@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    frontend: landing
+  name: landing
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: landing
+            port:
+              number: 8000
+        path: /apps/landing
+        pathType: Prefix
+      - backend:
+          service:
+            name: landing
+            port:
+              number: 8000
+        path: /beta/apps/landing
+        pathType: Prefix
+      - backend:
+          service:
+            name: landing
+            port:
+              number: 8000
+        path: /preview/apps/landing
+        pathType: Prefix
+  tls:
+  - {}

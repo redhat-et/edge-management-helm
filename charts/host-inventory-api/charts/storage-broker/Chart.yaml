@@ -1,6 +1,6 @@
 apiVersion: v2
-name: playbook-dispatcher
-description: Playbook Dispatcher service
+name: storage-broker
+description: Storage Broker service
 
 # A chart can be either an 'application' or a 'library' chart.
 #

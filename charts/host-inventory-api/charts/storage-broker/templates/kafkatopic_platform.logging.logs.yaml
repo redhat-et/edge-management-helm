@@ -1,0 +1,11 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    env: env-demo
+    strimzi.io/cluster: kafka
+  name: platform.logging.logs
+spec:
+  config: {}
+  partitions: 4
+  replicas: 1

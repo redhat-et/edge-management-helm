@@ -1,0 +1,11 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    env: env-demo
+    strimzi.io/cluster: kafka
+  name: platform.upload.validation
+spec:
+  config: {}
+  partitions: 24
+  replicas: 1

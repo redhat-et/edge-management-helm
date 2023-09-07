@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    env: env-demo
+    strimzi.io/cluster: kafka
+  name: platform.inventory.host-ingress-p1
+spec:
+  config:
+    retention.bytes: "2684354560"
+    retention.ms: "86400000"
+  partitions: 20
+  replicas: 1

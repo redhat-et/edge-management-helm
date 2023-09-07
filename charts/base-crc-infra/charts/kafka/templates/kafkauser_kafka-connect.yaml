@@ -1,0 +1,8 @@
+kind: KafkaUser
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  labels:
+    app: env-demo
+    strimzi.io/cluster: kafka
+  name: connect
+spec: {}

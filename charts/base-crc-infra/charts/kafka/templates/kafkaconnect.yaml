@@ -1,0 +1,27 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  labels:
+    env: env-demo
+  name: kafkaconnect
+spec:
+  bootstrapServers: kafka-kafka-bootstrap.demo.svc:9092
+  config:
+    config.storage.replication.factor: "1"
+    config.storage.topic: connect-cluster-configs
+    connector.client.config.override.policy: All
+    group.id: connect-cluster
+    offset.storage.replication.factor: "1"
+    offset.storage.topic: connect-cluster-offsets
+    status.storage.replication.factor: "1"
+    status.storage.topic: connect-cluster-status
+  image: quay.io/cloudservices/xjoin-kafka-connect-strimzi:latest
+  replicas: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 250m
+      memory: 512Mi
+  version: 3.1.0

@@ -1,0 +1,11 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    env: env-demo
+    strimzi.io/cluster: kafka
+  name: platform.upload.announce
+spec:
+  config: {}
+  partitions: 64
+  replicas: 1
